@@ -124,6 +124,41 @@
           }
         }
       }
+    },
+    "ngx-markjs": {
+      "projectType": "library",
+      "root": "projects/ngx-markjs",
+      "sourceRoot": "projects/ngx-markjs/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-markjs/tsconfig.lib.json",
+            "project": "projects/ngx-markjs/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-markjs/src/test.ts",
+            "tsConfig": "projects/ngx-markjs/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-markjs/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-markjs/tsconfig.lib.json",
+              "projects/ngx-markjs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ngx-markjs-demo"
 }

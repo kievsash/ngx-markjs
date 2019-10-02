@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-markjs": [
+        "dist/ngx-markjs"
+      ],
+      "ngx-markjs/*": [
+        "dist/ngx-markjs/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
