@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-import { NgxMarkjsComponent } from './ngx-markjs.component';
 import { MarkjsHighlightDirective } from './markjs-highlight.directive';
 
 
 
 @NgModule({
-  declarations: [NgxMarkjsComponent, MarkjsHighlightDirective],
+  declarations: [MarkjsHighlightDirective],
   imports: [
   ],
-  exports: [NgxMarkjsComponent]
+  exports: [MarkjsHighlightDirective]
 })
 export class NgxMarkjsModule { }
