@@ -35,5 +35,14 @@ export class AppModule { }
      [scrollToFirstMarked]="true"
 >
 ```
+### Start demo project
+
+Clone this repo and do install
+
+```
+npm install
+
+ng serve
+```
 
 Additional mark.js config params can be found on its [officail site](https://markjs.io)
