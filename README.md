@@ -11,7 +11,7 @@ It is Angular 8 wrapper for very cool text highlighting lib [Mark.js](https://ma
 npm i ngx-markjs
 ```
 
-###Import module
+### Import module
 
 ```
 ...
@@ -27,7 +27,7 @@ import {NgxMarkjsModule} from 'ngx-markjs';
 })
 export class AppModule { }
 ```
-###Use directive
+### Use directive
 ```
 <div class="content_wrapper" 
      [markjsHighlight]="searchValueObservable$"
