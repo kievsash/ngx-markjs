@@ -49,7 +49,9 @@ export class MarkjsHighlightDirective implements OnChanges {
     }
 
     this.hightlightText();
-    this.scrollToFirstMarkedText();
+    if (this.scrollToFirstMarked) {
+      this.scrollToFirstMarkedText();
+    }
   }
 
   hightlightText() {
