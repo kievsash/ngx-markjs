@@ -1,24 +1,62 @@
-# NgxMarkjs
+# In development
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.8.
+# ngx-markjs
 
-## Code scaffolding
+It is Angular 8 wrapper for very cool text highlighting lib [Mark.js](https://markjs.io)
 
-Run `ng generate component component-name --project ngx-markjs` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-markjs`.
-> Note: Don't forget to add `--project ngx-markjs` or else it will be added to the default project in your `angular.json` file. 
+## How to use
 
-## Build
+### Install
+```
+npm i ngx-markjs
+```
 
-Run `ng build ngx-markjs` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Import module
 
-## Publishing
+```
+...
+import {NgxMarkjsModule} from 'ngx-markjs';
 
-After building your library with `ng build ngx-markjs`, go to the dist folder `cd dist/ngx-markjs` and run `npm publish`.
+@NgModule({
+...
+  imports: [
+...
+    NgxMarkjsModule
+  ],
+...
+})
+export class AppModule { }
+```
+### Use directive
+```
+<div class="content_wrapper" 
+     [markjsHighlight]="searchText"
+     [markjsConfig]="config"
+     [scrollToFirstMarked]="true"
+>
+```
 
-## Running unit tests
+### If you want to use it from source code
 
-Run `ng test ngx-markjs` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Incase of some compilation issues you can try to import ngxMarkjsModule directly in your application from .tx file
 
-## Further help
+```
+import {NgxMarkjsModule} from 'ngx-markjs/src/public-api'; 
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Start demo project
+
+Clone this repo and do install
+
+```
+npm install
+
+ng serve
+```
+![demo app](ngx-markjs.gif)
+
+Additional mark.js config params can be found on its [officail site](https://markjs.io)
+
+Did you Like this lib? Follow me on [Twitter](https://twitter.com/El_Extremal) for more Angular and RxJS staff!
+
+Need a mentorship for Angular and RxJS? Find me on [codementor.io](https://www.codementor.io/alexanderposhtaruk)
