@@ -129,7 +129,7 @@
       "projectType": "library",
       "root": "projects/ngx-markjs",
       "sourceRoot": "projects/ngx-markjs/src",
-      "prefix": "lib",
+      "prefix": "",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

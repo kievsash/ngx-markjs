@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve --port 4201",
     "build": "ng build",
+    "build:ngx-markjs": "ng build ngx-markjs && npm run copy:lib:dist",
+    "copy:lib:dist": "cp -r ./projects/ngx-markjs/src ./dist/ngx-markjs/src",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -19,6 +21,7 @@
     "@angular/platform-browser": "~8.2.3",
     "@angular/platform-browser-dynamic": "~8.2.3",
     "@angular/router": "~8.2.3",
+    "mark.js": "^8.11.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

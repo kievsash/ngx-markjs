@@ -1,5 +1,9 @@
+header {
+  margin-left: 20px;
+}
 .content_wrapper {
-  font-size: 18px;
+  position: relative;
+  font-size: 20px;
   margin: 20px;
   width: 70%;
   height: 500px;
@@ -7,6 +11,7 @@
   max-height: 500px;
   overflow: auto;
   border: 1px solid silver;
+  padding: 20px;
 }
 
 .search_input {
@@ -18,5 +23,7 @@
   input {
     font-size: 20px;
     width: 70%;
+    padding-left: 10px;
+    border-radius: 10px;
   }
 }

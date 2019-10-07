@@ -2,10 +2,14 @@
   <h1>{{title}}</h1>
 </header>
 <div class="search_input">
-  <input placeholder="Search..." type="text">
+  <input placeholder="Search..." #search type="text">
 </div>
-<div class="content_wrapper">
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+<div class="content_wrapper"
+     [markjsHighlight]="searchText$ | async"
+     [markjsConfig]="searchConfig"
+     [scrollToFirstMarked]="false"
+>
+  <p>Lorem ipsum dolor ssit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
   aliqua. Nunc consequat interdum varius sit amet mattis vulputate enim nulla. Diam ut venenatis tellus in metus
   vulputate eu. Aliquam ultrices sagittis orci a scelerisque purus semper eget. Pellentesque habitant morbi tristique
   senectus et netus et malesuada. Arcu dictum varius duis at consectetur. At varius vel pharetra vel turpis nunc eget.
