@@ -1,4 +1,4 @@
-import {Directive, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Directive, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2} from '@angular/core';
 import {Observable, isObservable} from 'rxjs';
 
 declare var require: any;
@@ -36,7 +36,10 @@ export class MarkjsHighlightDirective implements OnChanges {
 
   markInstance: any;
 
-  constructor(private contentElementRef: ElementRef) {
+  constructor(
+    private contentElementRef: ElementRef,
+    private renderer: Renderer2
+  ) {
   }
 
   ngOnChanges(changes) {
@@ -46,7 +49,7 @@ export class MarkjsHighlightDirective implements OnChanges {
     }
 
     this.hightlightText();
-    this.scrollToFirstMarkedText()
+    this.scrollToFirstMarkedText();
   }
 
   hightlightText() {
@@ -71,6 +74,8 @@ export class MarkjsHighlightDirective implements OnChanges {
   }
 
   scrollSmooth(scrollElement, firstOffsetTop) {
+    const renderer = this.renderer;
+
     if (cancelAnimationId) {
       cancelAnimationFrame(cancelAnimationId);
     }
@@ -84,8 +89,7 @@ export class MarkjsHighlightDirective implements OnChanges {
       },
       draw(progress) {
         const nextStep = currentScrollTop + progress * delta;
-        console.log('progress ', progress, nextStep);
-        scrollElement.scrollTo(0, nextStep);
+        renderer.setProperty(scrollElement, 'scrollTop', nextStep);
       }
     });
   }

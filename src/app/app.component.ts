@@ -17,8 +17,7 @@ export class AppComponent implements AfterViewInit {
     this.searchText$ = fromEvent(this.searchElemRef.nativeElement, 'keyup').pipe(
       map((e: Event) => (e.target as HTMLInputElement).value),
       debounceTime(300),
-      distinctUntilChanged(),
-      tap((text) => console.log('text ', text))
+      distinctUntilChanged()
     );
   }
 }
