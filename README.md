@@ -1,4 +1,3 @@
-# In development
 
 # ngx-markjs
 
@@ -38,11 +37,13 @@ export class AppModule { }
 
 ### If you want to use it from source code
 
-Incase of some compilation issues you can try to import ngxMarkjsModule directly in your application from .tx file
+Incase of some compilation issues you can try to import ngxMarkjsModule directly in your application from .ts file
 
 ```
 import {NgxMarkjsModule} from 'ngx-markjs/src/public-api'; 
 ```
+
+But in that case you should include path to module in tsconfig.json ('include' section).
 
 ### Start demo project
 
