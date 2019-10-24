@@ -1,60 +1,44 @@
-import {Directive, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2} from '@angular/core';
-import {Observable, isObservable} from 'rxjs';
+import { Directive, ElementRef, EventEmitter, Input, NgZone, OnChanges, Output, Renderer2, SimpleChanges } from '@angular/core';
 
 declare var require: any;
 const Mark = require('mark.js');
-
-let cancelAnimationId;
-
-function animate({timing, draw, duration}) {
-  const start = performance.now();
-  cancelAnimationId = requestAnimationFrame(function animate2(time) {
-    // timeFraction goes from 0 to 1
-    let timeFraction = (time - start) / duration;
-    if (timeFraction > 1) {
-      timeFraction = 1;
-    }
-    // calculate the current animation state
-    const progress = timing(timeFraction);
-    draw(progress); // draw it
-    if (timeFraction < 1) {
-      cancelAnimationId = requestAnimationFrame(animate2);
-    }
-  });
-}
 
 @Directive({
   selector: '[markjsHighlight]'
 })
 export class MarkjsHighlightDirective implements OnChanges {
 
-  @Input() markjsHighlight = '';
+  @Input() markjsHighlight: string = '';
   @Input() markjsConfig: any = {};
   @Input() scrollToFirstMarked: boolean = false;
 
-  @Output() getInstance = new EventEmitter<any>();
+  @Output() readonly getInstance: EventEmitter<any> = new EventEmitter<any>();
 
-  markInstance: any;
+  private cancelAnimationId: number;
+  private markInstance: any;
 
   constructor(
     private contentElementRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private ngZone: NgZone
   ) {
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (!this.markInstance) {
-      this.markInstance = new Mark(this.contentElementRef.nativeElement);
+      this.ngZone.runOutsideAngular(() => this.markInstance = new Mark(this.contentElementRef.nativeElement));
       this.getInstance.emit(this.markInstance);
     }
 
-    this.hightlightText();
-    if (this.scrollToFirstMarked) {
-      this.scrollToFirstMarkedText();
-    }
+    this.ngZone.runOutsideAngular(() => {
+      this.hightlightText();
+      if (this.scrollToFirstMarked) {
+        this.scrollToFirstMarkedText();
+      }
+    });
   }
 
-  hightlightText() {
+  private hightlightText(): void {
     this.markjsHighlight = this.markjsHighlight || '';
     if (this.markjsHighlight && this.markjsHighlight.length <= 2) {
       this.markInstance.unmark();
@@ -68,30 +52,47 @@ export class MarkjsHighlightDirective implements OnChanges {
     }
   }
 
-  scrollToFirstMarkedText() {
+  private scrollToFirstMarkedText(): void {
     const content = this.contentElementRef.nativeElement;
-    const firstOffsetTop = (content.querySelector('mark') || {}).offsetTop || 0;
+    const firstOffsetTop: number = (content.querySelector('mark') || {}).offsetTop || 0;
 
     this.scrollSmooth(content, firstOffsetTop);
   }
 
-  scrollSmooth(scrollElement, firstOffsetTop) {
-    const renderer = this.renderer;
+  private scrollSmooth(scrollElement, firstOffsetTop: number): void {
+    const renderer: Renderer2 = this.renderer;
 
-    if (cancelAnimationId) {
-      cancelAnimationFrame(cancelAnimationId);
+    if (this.cancelAnimationId) {
+      cancelAnimationFrame(this.cancelAnimationId);
     }
-    const currentScrollTop = scrollElement.scrollTop;
-    const delta = firstOffsetTop - currentScrollTop;
+    const currentScrollTop: number = scrollElement.scrollTop;
+    const delta: number = firstOffsetTop - currentScrollTop;
 
-    animate({
+    this.animate({
       duration: 500,
-      timing(timeFraction) {
+      timing(timeFraction: number): number {
         return timeFraction;
       },
-      draw(progress) {
-        const nextStep = currentScrollTop + progress * delta;
+      draw(progress: number): void {
+        const nextStep: number = currentScrollTop + progress * delta;
         renderer.setProperty(scrollElement, 'scrollTop', nextStep);
+      }
+    });
+  }
+
+  private animate({timing, draw, duration}): void {
+    const start: number = performance.now();
+    this.cancelAnimationId = requestAnimationFrame(function animate2(time) {
+      // timeFraction goes from 0 to 1
+      let timeFraction: number = (time - start) / duration;
+      if (timeFraction > 1) {
+        timeFraction = 1;
+      }
+      // calculate the current animation state
+      const progress: number = timing(timeFraction);
+      draw(progress); // draw it
+      if (timeFraction < 1) {
+        this.cancelAnimationId = requestAnimationFrame(animate2);
       }
     });
   }
