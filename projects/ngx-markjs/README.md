@@ -15,7 +15,7 @@ npm i ngx-markjs
 
 ```
 ...
-import {NgxMarkjsModule} from 'ngx-markjs';
+import { NgxMarkjsModule } from 'ngx-markjs';
 
 @NgModule({
 ...
@@ -41,7 +41,7 @@ export class AppModule { }
 Incase of some compilation issues you can try to import ngxMarkjsModule directly in your application from .tx file
 
 ```
-import {NgxMarkjsModule} from 'ngx-markjs/src/public-api'; 
+import { NgxMarkjsModule } from 'ngx-markjs/src/public-api'; 
 ```
 
 ### Start demo project
