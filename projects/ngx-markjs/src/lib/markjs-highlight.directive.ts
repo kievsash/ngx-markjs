@@ -62,7 +62,7 @@ export class MarkjsHighlightDirective implements OnChanges {
     } else {
       this.markInstance.unmark({
         done: () => {
-          this.markInstance.mark((this.markjsHighlight || ''), this.markjsConfig);
+          this.markInstance.markRegExp((this.markjsHighlight || ''), this.markjsConfig);
         }
       });
     }
