@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {fromEvent, Observable} from 'rxjs';
+import {fromEvent, Observable, of} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, tap} from 'rxjs/operators';
 
 @Component({
@@ -9,12 +9,12 @@ import {debounceTime, distinctUntilChanged, map, tap} from 'rxjs/operators';
 })
 export class AppComponent implements AfterViewInit {
   title = 'ngx-markjs-demo';
-  @ViewChild('search', {static: false}) searchElemRef: ElementRef;
-  searchText$: Observable<string>;
+  @ViewChild('search', {static: false}) searchElemRef: ElementRef | undefined;
+  searchText$: Observable<string | null> = of(null);
   searchConfig = {separateWordSearch: false};
 
   ngAfterViewInit() {
-    this.searchText$ = fromEvent(this.searchElemRef.nativeElement, 'keyup').pipe(
+    this.searchText$ = fromEvent<Event>(this.searchElemRef?.nativeElement, 'keyup').pipe(
       map((e: Event) => (e.target as HTMLInputElement).value),
       debounceTime(300),
       distinctUntilChanged()

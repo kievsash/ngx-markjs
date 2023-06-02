@@ -1,24 +1,11 @@
 {
   "name": "ngx-markjs",
-  "version": "0.1.2",
-  "license": "MIT",
-  "author": {
-    "name": "Oleksandr Poshtaruk",
-    "email": "kievsash@ukr.net",
-    "url": "https://github.com/kievsash"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kievsash/ngx-markjs.git"
-  },
-  "keywords": [
-    "mark.js",
-    "ngx-markjs",
-    "Angular"
-  ],
+  "version": "14.0.0",
   "peerDependencies": {
-    "@angular/common": "^8.2.8",
-    "@angular/core": "^8.2.8",
-    "mark.js": "^8.11.1"
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
   }
 }

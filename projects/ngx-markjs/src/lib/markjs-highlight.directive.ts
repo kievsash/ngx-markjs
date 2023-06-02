@@ -1,12 +1,10 @@
-import {Directive, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2} from '@angular/core';
-import {Observable, isObservable} from 'rxjs';
+import {Directive, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer2} from '@angular/core';
 
-declare var require: any;
-const Mark = require('mark.js');
+import Mark from 'mark.js';
 
-let cancelAnimationId;
+let cancelAnimationId: number;
 
-function animate({timing, draw, duration}) {
+function animate({timing, draw, duration}: {timing: (x: number) => number, draw: (y: number) => void, duration: number}) {
   const start = performance.now();
   cancelAnimationId = requestAnimationFrame(function animate2(time) {
     // timeFraction goes from 0 to 1
@@ -28,7 +26,7 @@ function animate({timing, draw, duration}) {
 })
 export class MarkjsHighlightDirective implements OnChanges {
 
-  @Input() markjsHighlight = '';
+  @Input() markjsHighlight: string | null = '';
   @Input() markjsConfig: any = {};
   @Input() scrollToFirstMarked: boolean = false;
 
@@ -42,7 +40,7 @@ export class MarkjsHighlightDirective implements OnChanges {
   ) {
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges() {
     if (!this.markInstance) {
       this.markInstance = new Mark(this.contentElementRef.nativeElement);
       this.getInstance.emit(this.markInstance);
@@ -75,7 +73,7 @@ export class MarkjsHighlightDirective implements OnChanges {
     this.scrollSmooth(content, firstOffsetTop);
   }
 
-  scrollSmooth(scrollElement, firstOffsetTop) {
+  scrollSmooth(scrollElement: Element, firstOffsetTop: number) {
     const renderer = this.renderer;
 
     if (cancelAnimationId) {

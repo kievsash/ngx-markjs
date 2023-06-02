@@ -7,6 +7,7 @@ It is Angular 8 wrapper for very cool text highlighting lib [Mark.js](https://ma
 
 ### Install
 ```
+npm i mark.js
 npm i ngx-markjs
 ```
 

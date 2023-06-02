@@ -3,3 +3,4 @@
  */
 
 export * from './lib/ngx-markjs.module';
+export * from './lib/markjs-highlight.directive';
